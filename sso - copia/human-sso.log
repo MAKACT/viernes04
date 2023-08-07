@@ -1,0 +1,36 @@
+2023-07-13T12:09:55,035 (INFO ) [main] com.vsm.human.sso.SsoApplication : Starting SsoApplication using Java 17.0.7 on DEVWEB04 with PID 5852 (C:\Users\kcarreon\Desktop\sso\target\classes started by kcarreon in C:\Users\kcarreon\Desktop\sso)
+2023-07-13T12:09:55,067 (DEBUG) [main] com.vsm.human.sso.SsoApplication : Running with Spring Boot v2.7.5, Spring v5.3.23
+2023-07-13T12:09:55,070 (INFO ) [main] com.vsm.human.sso.SsoApplication : No active profile set, falling back to 1 default profile: "default"
+2023-07-13T12:09:57,613 (INFO ) [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-13T12:09:57,690 (INFO ) [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 43 ms. Found 0 JPA repository interfaces.
+2023-07-13T12:10:03,182 (INFO ) [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer : Tomcat initialized with port(s): 4000 (http)
+2023-07-13T12:10:03,230 (INFO ) [main] org.apache.catalina.core.StandardService : Starting service [Tomcat]
+2023-07-13T12:10:03,231 (INFO ) [main] org.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/9.0.68]
+2023-07-13T12:10:03,873 (INFO ) [main] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] : Initializing Spring embedded WebApplicationContext
+2023-07-13T12:10:03,874 (INFO ) [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 8113 ms
+2023-07-13T12:10:04,589 (WARN ) [main] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-07-13T12:10:04,711 (INFO ) [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting...
+2023-07-13T12:10:05,754 (INFO ) [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed.
+2023-07-13T12:10:05,957 (INFO ) [main] org.hibernate.jpa.internal.util.LogHelper : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-13T12:10:06,174 (INFO ) [main] org.hibernate.Version : HHH000412: Hibernate ORM core version 5.6.12.Final
+2023-07-13T12:10:06,805 (INFO ) [main] org.hibernate.annotations.common.Version : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-07-13T12:10:07,202 (INFO ) [main] org.hibernate.dialect.Dialect : HHH000400: Using dialect: org.hibernate.dialect.Oracle10gDialect
+2023-07-13T12:10:07,990 (INFO ) [main] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-07-13T12:10:08,006 (INFO ) [main] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-07-13T12:10:10,155 (INFO ) [main] org.opensaml.saml2.metadata.provider.AbstractReloadingMetadataProvider : New metadata succesfully loaded for 'https://login.microsoftonline.com/68a7ff20-812f-4738-90ea-0b1051846f74/federationmetadata/2007-06/federationmetadata.xml?appid=5aa9e995-f56f-4a42-bc56-7fe1d997d2fb'
+2023-07-13T12:10:10,162 (INFO ) [main] org.opensaml.saml2.metadata.provider.AbstractReloadingMetadataProvider : Next refresh cycle for metadata provider 'https://login.microsoftonline.com/68a7ff20-812f-4738-90ea-0b1051846f74/federationmetadata/2007-06/federationmetadata.xml?appid=5aa9e995-f56f-4a42-bc56-7fe1d997d2fb' will occur on '2023-07-13T21:10:09.025Z' ('2023-07-13T16:10:09.025-05:00' local time)
+2023-07-13T12:10:11,718 (INFO ) [main] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping : Adding welcome page template: index
+2023-07-13T12:10:12,864 (INFO ) [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer : Tomcat started on port(s): 4000 (http) with context path ''
+2023-07-13T12:10:12,902 (INFO ) [main] com.vsm.human.sso.SsoApplication : Started SsoApplication in 19.465 seconds (JVM running for 21.756)
+2023-07-13T12:10:12,917 (INFO ) [main] com.vsm.human.sso.SsoApplication : ..::: LISTO HUMAN SSO version 2.0.0 :::...
+2023-07-13T12:13:08,690 (INFO ) [http-nio-4000-exec-1] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-13T12:13:08,690 (INFO ) [http-nio-4000-exec-1] org.springframework.web.servlet.DispatcherServlet : Initializing Servlet 'dispatcherServlet'
+2023-07-13T12:13:08,694 (INFO ) [http-nio-4000-exec-1] org.springframework.web.servlet.DispatcherServlet : Completed initialization in 4 ms
+2023-07-13T12:13:09,069 (ERROR) [http-nio-4000-exec-1] com.vsm.human.sso.msal.config.AuthFilter : clientId is null or empty
+2023-07-13T12:13:09,330 (WARN ) [http-nio-4000-exec-1] com.vsm.human.sso.msal.exeption.ErrorHandlerController : Existe algún error con tu correo, por favor verifícalo con el administrador
+2023-07-13T12:13:10,543 (DEBUG) [http-nio-4000-exec-3] com.vsm.human.sso.saml.controllers.SSOController : Current authentication instance from security context is null
+2023-07-13T12:13:10,544 (INFO ) [http-nio-4000-exec-3] com.vsm.human.sso.saml.controllers.SSOController : Configured Identity Provider for SSO: https://sts.windows.net/68a7ff20-812f-4738-90ea-0b1051846f74/
+2023-07-13T12:13:27,793 (DEBUG) [http-nio-4000-exec-7] com.vsm.human.sso.saml.controllers.SSOController : Current authentication instance from security context is null
+2023-07-13T12:13:27,793 (INFO ) [http-nio-4000-exec-7] com.vsm.human.sso.saml.controllers.SSOController : Configured Identity Provider for SSO: https://sts.windows.net/68a7ff20-812f-4738-90ea-0b1051846f74/
+2023-07-13T12:13:28,385 (DEBUG) [http-nio-4000-exec-8] com.vsm.human.sso.saml.controllers.SSOController : Current authentication instance from security context is null
+2023-07-13T12:13:28,386 (INFO ) [http-nio-4000-exec-8] com.vsm.human.sso.saml.controllers.SSOController : Configured Identity Provider for SSO: https://sts.windows.net/68a7ff20-812f-4738-90ea-0b1051846f74/

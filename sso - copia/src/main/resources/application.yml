@@ -1,0 +1,126 @@
+server:
+  port: '4000'
+
+aad:
+  msGraphEndpointHost: https://graph.microsoft.com/
+
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver 
+    driverClassName: oracle.jdbc.driver.OracleDriver
+    #DESARROLLO
+    url: jdbc:oracle:thin:@192.168.0.34:1521/human19
+    username: HUMAN    
+    password: HUMAN55
+    #QA
+    #url: jdbc:oracle:thin:@192.168.0.34:1521/humanqa2
+    #username: human    
+    #password: HUMANQA001
+    #PRODUCCION
+    #url: jdbc:oracle:thin:@192.168.130.171:1521/humanv2
+    #username: HUMANWEB_AMW    
+    #password: wQ30rdHcoa0X
+  main:
+    allow-circular-references: 'true'
+    allow-bean-definition-overriding: 'true'
+  jpa:
+    database-platform: org.hibernate.dialect.Oracle10gDialect
+  banner:
+    image:
+      width: '50'
+      margin: '6'
+      #location: classpath:logo.png
+      height: '30'
+      #pixelmode: BLOCK
+      bitdepth: '6'    
+
+msal:
+  auth:
+    page:
+      controller:
+        login:
+          url:
+            error: /human-msal/error
+            succes: https://www.humaneland.net/saml/loginSSOVacations.xhtml?
+        error:
+          login:
+            simlate:
+              count: 'CM-5000S: Error la cuenta de correo'
+            empty:
+              email: 'CM-5000EI: El correo que ha ingresado no es valido (No se encuentra registrado)'
+            many:
+              emails: 'CM-5000EMA: El correo que ha ingresado se esta utilizando para mas empleados'
+        end:
+          session:
+            endpoint: https://login.microsoftonline.com/common/oauth2/v2.0/logout
+        query:
+          select:
+            get:
+              credentials: SELECT he.NUM_CIA, he.NUM_EMP, hc.NUMERO_COMPANIA, hc.CLAVE_COMPANIA  FROM
+                HUMAN.HU_EMPLS he, HUMAN.HU_COMPANIA hc  WHERE he.NUM_CIA = hc.NUMERO_COMPANIA
+                AND he.EMAIL =
+        post:
+          logout:
+            redirect-uri: ?post_logout_redirect_uri=
+      filter:
+        acceso:
+          azure: SELECT * FROM HUMAN.HU_ACCESO_AZURE WHERE CVE_COMPANIA=
+
+saml:
+  service:
+    provider:
+      entity:
+        id: com:vsm:spring:boot:sp
+  auth:
+    page:
+      controller:
+        error:
+          login:
+            simlate:
+              count: 'CM-5000S: Error la cuenta de correo'
+            many:
+              emails: 'CM-5000EMA: El correo que ha ingresado se esta utilizando para mas empleados'
+            empty:
+              email: 'CM-5000EI: El correo que ha ingresado no es valido (No se encuentra registrado)'
+        login:
+          url:
+            succes: https://www.humaneland.net/saml/loginSSOVacations.xhtml?
+            error: /error
+        query:
+          credentials: SELECT he.NUM_CIA, he.NUM_EMP, hc.NUMERO_COMPANIA, hc.CLAVE_COMPANIA 
+                                                   FROM HUMAN.HU_EMPLS he, HUMAN.HU_COMPANIA hc 
+                                                   WHERE he.NUM_CIA = hc.NUMERO_COMPANIA AND he.STATUS = 'A' AND NUMERO_COMPANIA < 5000 AND LOWER (TRIM( he.EMAIL)) =
+          implants: SELECT substr(EXT.USER_SKEY,1,(length(EXT.USER_SKEY)-10)) AS NUM_CIA, 
+                                                            substr(EXT.USER_SKEY, length(substr(EXT.USER_SKEY,1,(length(EXT.USER_SKEY)-10)))+1 , (length(EXT.USER_SKEY))) AS NUM_EMP, 
+                                                            substr(EXT.USER_SKEY,1,(length(EXT.USER_SKEY)-10)) AS NUMERO_COMPANIA, 
+                                                            (SELECT CLAVE_COMPANIA FROM HUMAN.HU_COMPANIA WHERE NUMERO_COMPANIA = substr(EXT.USER_SKEY,1,(length(EXT.USER_SKEY)-10))) AS CLAVE_COMPANIA 
+                                                             FROM HUMAN.HU_USUARIO_EXTERNO EXT 
+                                                             WHERE  STATUS = 'A' 
+                                                             AND substr(EXT.USER_SKEY,1,(length(EXT.USER_SKEY)-10)) < 5000 AND LOWER (TRIM(EMAIL)) =  
+  keystore:
+    password: nalle123
+  private:
+    key:
+      alias: apollo
+      password: nalle123
+  idp:
+    metedata:
+      url: https://login.microsoftonline.com/68a7ff20-812f-4738-90ea-0b1051846f74/federationmetadata/2007-06/federationmetadata.xml?appid=5aa9e995-f56f-4a42-bc56-7fe1d997d2fb
+
+logging:
+  pattern:
+    file: '%d{ISO8601} (%-5level) [%thread] %logger{100} : %msg%n%throwable'
+    console: '%d{ISO8601} (%-5level) [%thread] %logger{100} : %msg%n%throwable'
+  file:
+    max-history: '10'
+    name: human-sso.log
+    max-size: 10MB
+  level:
+    com.vsm.human.sso: DEBUG
+    org.springframework.security: ERROR
+
+    
+    
+
+
+

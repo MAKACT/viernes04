@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
+<title>Main</title>
+<style>
+
+.loader {
+			border: 16px solid #f3f3f3;
+			border-radius: 50%;
+			border-top: 16px solid #009999;
+			width: 150px;
+			height: 150px;
+			-webkit-animation: spin 2s linear infinite;
+			 
+			animation: spin 2s linear infinite;
+		}
+
+		.verticalcenter {
+			display: table-cell;
+			height: 400px;
+			vertical-align: middle;
+		}
+
+		 
+		@-webkit-keyframes spin {
+			0% {
+				-webkit-transform: rotate(0deg);
+			}
+
+			100% {
+				-webkit-transform: rotate(360deg);
+			}
+		}
+
+		@keyframes spin {
+			0% {
+				transform: rotate(0deg);
+			}
+
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+</style>
+
+</head>
+<body onload="redirect()">
+
+	<center>
+		<span id="compania" th:utext="${compania}" hidden></span> 
+		<span id="errorLogin" th:utext="${errorLogin}" hidden></span> 
+		<span id="urlRedirect" th:utext="${urlRedirect}" hidden></span>
+
+		<script type="text/javascript">
+			function redirect() {
+				var error = document.getElementById("errorLogin").textContent;
+				var compania = document.getElementById("compania").textContent;
+				sessionStorage.setItem('errorLogin', error);
+				sessionStorage.setItem('compania', compania);
+				var url = document.getElementById("urlRedirect").textContent;
+				window.location = url;
+			}
+		</script>
+		<div class="verticalcenter">
+			<div class="loader"></div>
+		</div>
+	</center>
+
+</body>
+</body>
+</html>

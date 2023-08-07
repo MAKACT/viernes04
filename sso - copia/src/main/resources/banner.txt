@@ -1,0 +1,15 @@
+____    ________     ______       ___       _      ___      ___        ____     ____      ____    
+`MM'    `MM'`MM'     `M'`MMb     dMM'      dM.     `MM\     `M'       6MMMMb\  6MMMMb\   6MMMMb   
+ MM      MM  MM       M  MMM.   ,PMM      ,MMb      MMM\     M       6M'    ` 6M'    `  8P    Y8  
+ MM      MM  MM       M  M`Mb   d'MM      d'YM.     M\MM\    M       MM       MM       6M      Mb 
+ MM      MM  MM       M  M YM. ,P MM     ,P `Mb     M \MM\   M       YM.      YM.      MM      MM 
+ MMMMMMMMMM  MM       M  M `Mb d' MM     d'  YM.    M  \MM\  M        YMMMMb   YMMMMb  MM      MM 
+ MM      MM  MM       M  M  YM.P  MM    ,P   `Mb    M   \MM\ M            `Mb      `Mb MM      MM 
+ MM      MM  MM       M  M  `Mb'  MM    d'    YM.   M    \MM\M             MM       MM MM      MM 
+ MM      MM  YM       M  M   YP   MM   ,MMMMMMMMb   M     \MMM             MM       MM YM      M9 
+ MM      MM   8b     d8  M   `'   MM   d'      YM.  M      \MM       L    ,M9 L    ,M9  8b    d8  
+_MM_    _MM_   YMMMMM9  _M_      _MM__dM_     _dMM__M_      \M       MYMMMM9  MYMMMM9    YMMMM9
+
+::Human SSO ::		(v2.1.0.0) Development Team Web..... Marzo 2023
+
+   

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Error</title>
+
+</head>
+<body onload="redirect()">
+	<center>
+		<h2>Pagina de error</h2>
+		<p id="errorLogin">[[${error}]]</p>
+		<ul>
+			<li><a rel="nofollow" id="enlace" href="#" onclick="cleanSessionStorage();">Ir al inicio</a></li>
+	</center>
+	</ul>
+
+	<script type="text/javascript">
+		function redirect() {
+			var error = sessionStorage.getItem('errorLogin');
+			document.getElementById("errorLogin").innerHTML = error;
+		}
+
+		function cleanSessionStorage() {
+			document.getElementById('enlace').setAttribute('href',  '/human-msal');
+		}
+	</script>
+</body>
+</html>

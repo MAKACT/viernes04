@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<body onload="redirect()">
+	<center>
+		<h2>Pagina de error</h2>
+		<p id="errorLogin">[[${error}]]</p>
+		<ul>
+			<li>
+				<a th:href="@{/}" onclick="cleanSessionStorage();">Ir al inicio </a>
+			</li>
+		</ul>
+	</center>
+
+	<script type="text/javascript">
+		function redirect() {
+			var error = sessionStorage.getItem('errorLogin');
+			document.getElementById("errorLogin").innerHTML = error;
+		}
+		function cleanSessionStorage() {
+			sessionStorage.clear('errorLogin')
+		}
+	</script>
+<body>
+</html>

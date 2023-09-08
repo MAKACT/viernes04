@@ -1,0 +1,78 @@
+service.provider.entity.id: com:vsm:spring:boot:sp
+idp.metedata.url: https://login.microsoftonline.com/68a7ff20-812f-4738-90ea-0b1051846f74/federationmetadata/2007-06/federationmetadata.xml?appid=5aa9e995-f56f-4a42-bc56-7fe1d997d2fb
+
+#DEV DB
+#spring.datasource.url: jdbc:oracle:thin:@192.168.0.34:1521/human19
+#spring.datasource.username: HUMAN
+#spring.datasource.password: HUMAN55
+
+#QA DB
+#spring.datasource.url: jdbc:oracle:thin:@192.168.0.34:1521/humanqa2
+#spring.datasource.username: human
+#spring.datasource.password: HUMANQA001
+
+#PRD DB
+spring.datasource.url: jdbc:oracle:thin:@192.168.130.171:1521/humanv2
+spring.datasource.username: HUMANWEB_AMW
+spring.datasource.password: wQ30rdHcoa0X
+
+spring.jpa.database-platform: org.hibernate.dialect.Oracle10gDialect
+
+spring.datasource.driver-class-name: oracle.jdbc.OracleDriver
+spring.datasource.driverClassName: oracle.jdbc.driver.OracleDriver
+
+
+auth.page.controller.login.url.error: /error
+auth.page.controller.error.login.empty.email: "CM-5000EI: El correo que ha ingresado no es valido (No se encuentra registrado)"
+auth.page.controller.error.login.many.emails: "CM-5000EMA: El correo que ha ingresado se esta utilizando para mas empleados"
+auth.page.controller.error.login.simlate.count: "CM-5000S: Error la cuenta de correo"
+
+#Local
+#auth.page.controller.login.url.succes: http://192.168.25.34:7001/worksocial/saml/loginSSOVacations.xhtml?
+#QA
+#auth.page.controller.login.url.succes: http://192.168.0.33:9901/worksocial/saml/loginSSOVacations.xhtml?
+#prd
+
+#cambio AKCT 
+auth.page.controller.login.url.succes: https://www.humaneland.net/login/sso_token.xhtml?
+#auth.page.controller.login.url.succes: https://www.humaneland.net/saml/loginSSOVacations.xhtml?
+
+auth.page.controller.query.select.get.credentials: SELECT he.NUM_CIA, he.NUM_EMP, hc.NUMERO_COMPANIA, hc.CLAVE_COMPANIA 
+                                                   FROM HUMAN.HU_EMPLS he, HUMAN.HU_COMPANIA hc 
+                                                   WHERE he.NUM_CIA = hc.NUMERO_COMPANIA AND he.STATUS = 'A' AND NUMERO_COMPANIA < 5000 AND LOWER (TRIM( he.EMAIL)) =
+
+
+auth.page.controller.query.select.get.credentials.implants: SELECT substr(EXT.USER_SKEY,1,(length(EXT.USER_SKEY)-10)) AS NUM_CIA, 
+                                                            substr(EXT.USER_SKEY, length(substr(EXT.USER_SKEY,1,(length(EXT.USER_SKEY)-10)))+1 , (length(EXT.USER_SKEY))) AS NUM_EMP, 
+                                                            substr(EXT.USER_SKEY,1,(length(EXT.USER_SKEY)-10)) AS NUMERO_COMPANIA, 
+                                                            (SELECT CLAVE_COMPANIA FROM HUMAN.HU_COMPANIA WHERE NUMERO_COMPANIA = substr(EXT.USER_SKEY,1,(length(EXT.USER_SKEY)-10))) AS CLAVE_COMPANIA 
+                                                             FROM HUMAN.HU_USUARIO_EXTERNO EXT 
+                                                             WHERE  STATUS = 'A' 
+                                                             AND substr(EXT.USER_SKEY,1,(length(EXT.USER_SKEY)-10)) < 5000 AND LOWER (TRIM(EMAIL)) = 
+
+
+
+spring.main.allow-circular-references: true
+spring.main.allow-bean-definition-overriding: true
+
+logging:
+  level:
+    org:
+      springframework:
+        security:
+          saml: DEBUG
+      opensaml: DEBUG
+    com:
+      spring:
+        boot:
+          security:
+            saml: DEBUG
+            
+
+saml:
+  keystore.password: nalle123
+  private.key:
+    alias: apollo
+    password: nalle123
+    
+

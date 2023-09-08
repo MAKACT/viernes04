@@ -2,6 +2,8 @@ package com.ehuman.sso.auth.services;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,9 +12,6 @@ import org.springframework.stereotype.Service;
 import com.ehuman.sso.auth.dto.EmpleadoDto;
 import com.ehuman.sso.auth.dto.EmpleadoTokenDto;
 import com.ehuman.sso.auth.dto.HuCatPropiedadesDto;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 
 @Service
@@ -23,18 +22,28 @@ public class ConsultaBDService {
 	private JdbcTemplate jdbcTemplate;
 	
 	@Autowired
-	private EmpleadoTokenService emplTokSer;
-
+	private EmpleadoTokenService emplTokSer; 
 	
-	private static final Logger LOG = LoggerFactory.getLogger(EmpleadoTokenService.class);
+	
+	
+	
+	private static final Logger LOG = LoggerFactory.getLogger(ConsultaBDService.class);
+	
 	
 	public String getUrlToken(String email) {
 	//public String getUrlToken(Long numEmp, Long numComp) {
 		//EmpleadoDto empEnc = recuperarRegistro(numEmp,numComp);//localiza datos de empleado en empleados intenos y esternos
 		LOG.info("Ingresa a getUrlToken:" + email );
-		EmpleadoDto empEnc = recuperarRegistro(email);
+		//modificacion para validar correccion de falla
+		
+		String email2 = email.replace("externo", "");
+		LOG.info("EMAIL SIN EXTERNO" +email2 );
+		
+		//
+		EmpleadoDto empEnc = recuperarRegistro(email2);
 		LOG.info("Empleado encontrado:"+empEnc.toString());
 		EmpleadoTokenDto empTkEnc =  new EmpleadoTokenDto();
+		EmpleadoTokenDto newempTkEnc =  new EmpleadoTokenDto();
 		String url = getUrl();
 		String anexoUrl= "login/sso_token.xhtml?tokenUrl=";
 		if(empEnc.getApell_mat()!= null && empEnc.getApell_pat()!=null && 
@@ -45,6 +54,7 @@ public class ConsultaBDService {
 
 
 				//buscar en tabla de tokens si existe registro
+				//empTkEnc= empTokenJ.getEmpleadoTokenJ(empEnc.getNum_cia(), empEnc.getNum_emp());
 				empTkEnc= emplTokSer.getEmpleadoToken(empEnc.getNum_cia(), empEnc.getNum_emp());
 				LOG.info("Empleado encontrado en tabla HU_EMPLS_TOKEN_WS: " +empTkEnc.toString());
 
@@ -53,29 +63,31 @@ public class ConsultaBDService {
 				if(empTkEnc.getNumCia()!= null && empTkEnc.getNumEmp()!= null && empTkEnc.getFechaMov()!= null &&empTkEnc.getToken()!= null) {
 
 					LOG.info("Valida atributos completos " +empTkEnc.toString());
-					emplTokSer.updateEmpleadoToken(empTkEnc, username);
+					newempTkEnc=emplTokSer.updateEmpleadoToken(empTkEnc, username);
+					LOG.info("Empleado actualizado en tabla tokens " +newempTkEnc.toString());
+					//empTokenJ.updateEmpleadoTokenJ(empTkEnc, username);
+					
 					//return empTkEnc.toString();
 
 
 
 				}else {
 					LOG.info("Ingresa para registrar un nuevo empeado en la tabla de token " +empEnc.toString());
-
-					empTkEnc = emplTokSer.addRegistroEmpleado(empEnc);
+					newempTkEnc = emplTokSer.addRegistroEmpleado(empEnc);
+					LOG.info("Empleado agregado en tabla tokens " +newempTkEnc.toString());
+					//empTkEnc = empTokenJ.addRegistroEmpleadoJ(empEnc);
 					//return empTkEnc.toString();
 
 					}
 				LOG.info("Envia URL con TOKEN");
-				return url+anexoUrl+empTkEnc.getToken();
+				return url+anexoUrl+newempTkEnc.getToken();
 		
 		}else {
 			LOG.info("Envia URL sin TOKEN");
 		  return url+anexoUrl+"1";
 		}
 		
-//		else {
-//			return url+"saml/sso_token.xhtml?tokenUrl=sin datos";
-//		}
+
 	}
 	
 	
@@ -88,6 +100,7 @@ public class ConsultaBDService {
 				
 				//EmpleadoDto empleadoDto= getEmpleado(numEmpleado, numeroCompania);
 				EmpleadoDto empleadoDto= getEmpleado(email);
+				LOG.info("empleadoDto: " +empleadoDto.toString());
 			if(empleadoDto.getApell_mat()!= null && empleadoDto.getApell_pat()!= null && empleadoDto.getNombre()!= null &&
 						empleadoDto.getNum_cia()!= null && empleadoDto.getNum_emp()!= null && empleadoDto.getNumeroCompania()!= null) {
 				//if(empleadoDto != null) {
@@ -100,6 +113,7 @@ public class ConsultaBDService {
 
 					//EmpleadoDto empleadoExterno =getEmpletadoExterno(numEmpleado, numeroCompania);
 					EmpleadoDto empleadoExterno =getEmpletadoExterno(email);
+					LOG.info("empleadoExterno: " +empleadoExterno.toString());
 					if(empleadoExterno.getApell_mat()!= null && empleadoExterno.getApell_pat()!= null && empleadoExterno.getNombre()!= null &&
 					empleadoExterno.getNum_cia()!= null && empleadoExterno.getNum_emp()!= null && empleadoExterno.getNumeroCompania()!= null) {
 					//if(empleadoExterno!= null)	{
@@ -228,8 +242,16 @@ public class ConsultaBDService {
 			emp = new EmpleadoDto(); //*****
 			
 	}
+		/*if(empleadoDtoNuevo.size()>1) {
+			emp = new EmpleadoDto();
+		}else if(empleadoDtoNuevo.size()== 1) {
+			emp =  empleadoDtoNuevo.get(0);
+		}
+		LOG.info("Empleado interno que regresa: "+ emp.toString());*/
 		return emp;//trae datos completos(nombre y apellidos)
 	}
+	
+	
 	
 	
 	//Obtener datos empleado interno  por email	
@@ -255,6 +277,12 @@ public class ConsultaBDService {
 					empExterno =  new EmpleadoDto();
 				}
 				
+				/*if(empleadoExterno.size()>1) {
+					empExterno = new EmpleadoDto();
+				}else if(empleadoExterno.size()== 1) {
+					empExterno =  empleadoExterno.get(0);
+				}*/
+				LOG.info("Empleado externo que regresa: "+ empExterno.toString());
 				return empExterno;
 	}
 	

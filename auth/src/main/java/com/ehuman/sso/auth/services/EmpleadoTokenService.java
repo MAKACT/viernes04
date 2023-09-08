@@ -45,15 +45,17 @@ public class EmpleadoTokenService {
 			return empDto;
 		}
 			
+		
 			
 				
-		public void updateEmpleadoToken(EmpleadoTokenDto empleadoTDto, String username)	{
+		public EmpleadoTokenDto updateEmpleadoToken(EmpleadoTokenDto empleadoTDto, String username)	{
 			LOG.info("Ingresa a updateEmpleadoToken con datos" +empleadoTDto.toString()+ "username: "+username);
 			String token = this.getJWTToken(username, 5000);
 		    empleadoTDto.setToken(token);
 		    empleadoTDto.setFechaMov(new Date(System.currentTimeMillis()));
 		    LOG.info("Datos de empleado a actualizar en BD: "+ empleadoTDto.toString());
 		    empeadoDao.save(this.dtoToModel(empleadoTDto));
+		    return empleadoTDto;
 		    }
 		    
 		    

@@ -40,7 +40,22 @@ private String producto;
 	public void setValor(String valor) {
 		this.valor = valor;
 	}
-	
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("HuCatPropiedadesDto [producto=");
+		builder.append(producto);
+		builder.append(", parametro=");
+		builder.append(parametro);
+		builder.append(", numero_sec=");
+		builder.append(numero_sec);
+		builder.append(", valor=");
+		builder.append(valor);
+		builder.append("]");
+		return builder.toString();
+	}
+	
+    
 
 }

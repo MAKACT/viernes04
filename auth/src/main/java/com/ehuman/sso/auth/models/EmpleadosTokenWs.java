@@ -11,12 +11,12 @@ import javax.persistence.Table;
 
 @Entity
 @IdClass(HuEmpleadoToken.class)
+//human.hu_empls_token_ws
 @Table(name="HU_EMPLS_TOKEN_WS")
 public class EmpleadosTokenWs {
 	
 	@Id
-	@Column(name="NUM_CIA")
-	private Long numCia;
+	@Column(name="NUM_CIA")	private Long numCia;
 	
 	@Id
 	@Column(name="NUM_EMP")
